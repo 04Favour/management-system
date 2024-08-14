@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Controller,
   Get,
@@ -17,7 +18,7 @@ export class TodolistController {
 
   @Post()
   create(@Body() createTodolistDto: CreateTodolistDto) {
-    return this.todolistService.create(createTodolistDto);
+    return this.todolistService.create();
   }
 
   @Get()
