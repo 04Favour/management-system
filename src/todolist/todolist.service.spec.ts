@@ -10,8 +10,8 @@ import * as argon2 from 'argon2'
 @Injectable()
 export class UserServiceTesting{
   constructor(@InjectRepository(User) private userService: UserService, private jwtService: JwtService, private userRepo: Repository<User> ){}
-  async create(payload: CreateUserDto): Promise<{access_token: string}>{
-    const {email, password, ...rest} = payload
+  async create(payload:CreateUserDto): Promise<{access_token: string}>{
+    const {email, password, ...rest}= payload
     const user = await this.userService.findEmail(email)
     if (user){
       throw new UnauthorizedException()
@@ -23,9 +23,9 @@ export class UserServiceTesting{
       rest
     })
     delete userDetails.password
-    const userPayload = { id: userDetails.id, email: userDetails.email}
+    const userPayload = {id: userDetails.id, email: userDetails.email}
     return {
-      access_token: await this .jwtService.signAsync(userPayload)
+      access_token: await this.jwtService.signAsync(userPayload)
     }
   }
 }

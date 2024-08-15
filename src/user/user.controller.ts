@@ -21,7 +21,7 @@ import { Roles } from 'src/guard/role';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -37,7 +37,7 @@ export class UserController {
   }
   @Get('/get')
   @UseGuards(AuthGuard(), RoleGuard)
-  @Roles(`admin`)
+  @Roles(`user`)
   findAll(){
     return this.userService.findAll()
   }

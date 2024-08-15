@@ -13,6 +13,7 @@ async function bootstrap() {
     }),
   );
   app.use(cookieParser())
+  app.setGlobalPrefix('api/v1')
   const port = process.env.PROJECT_PORT;
   await app.listen(port, () => {
     console.log(`Server is running on port:${port}`);

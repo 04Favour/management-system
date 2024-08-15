@@ -6,13 +6,20 @@ import { Todolist } from './entities/todolist.entity';
 import { Repository } from 'typeorm';
 import { User } from 'src/user/Entity/user.entity';
 
+
 @Injectable()
 export class TodolistService {
   // eslint-disable-next-line prettier/prettier
   constructor(@InjectRepository(Todolist) private readonly todoRepo: Repository<Todolist>){}
 
-  create() {
-    return 'This action adds a new todolist';
+  async create(payload: CreateTodolistDto, user: User) {
+    const todo = new Todolist();
+    todo.userId = user.id;
+    todo.title = payload.title;
+    todo.description = payload.description;
+    Object.assign(todo, payload);
+    this.todoRepo.create(todo);
+    return await this.todoRepo.save(todo);
   }
 
   findAll() {

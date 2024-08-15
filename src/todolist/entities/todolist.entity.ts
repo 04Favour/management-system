@@ -8,6 +8,9 @@ export class Todolist extends Base {
     title: string;
     @Column()
     description: string;
+    
+    @Column()
+    userId: string;
 
     @ManyToOne(()=> User, (user)=> user.todo)
     user: User[]
