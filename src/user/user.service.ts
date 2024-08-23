@@ -15,22 +15,22 @@ import { loginDto } from './dto/login.dto';
 export class UserService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>, private jwtService: JwtService){}
   async create(payload: CreateUserDto) {
-    const {email, password, ...rest}= payload
-    const user = await this.userRepo.findOne({where:{email: email}})
+    const {email, password, ...rest} = payload;
+    const user = await this.userRepo.findOne({where:{email:email}})
     if (user){
-      throw new HttpException(`Sorry user with this email already exist`, 400)
+      throw new HttpException(`User already exists`, 400)
     }
-    const hashPassword = await argon2.hash(password);
-    const userDetails = await this.userRepo.save({
+    const hashedPassword = await argon2.hash(password)
+    const userDetails =await this.userRepo.save({
       email,
-      password: hashPassword,
+      password: hashedPassword,
       ...rest
     })
-    delete userDetails.password;
+    delete userDetails.password
     const userPayload = {id: userDetails.id, email: userDetails.email}
     return {
-      access_token: await this.jwtService.signAsync(userPayload),
-    };
+      access_token: await this.jwtService.signAsync(userPayload)
+    }
   }
 
   async findEmail(email:string){
@@ -78,14 +78,14 @@ export class UserService {
   }
 
   findAll() {
-    return `This action returns all users`
+    return this.userRepo.find();
   }
 
   async user (headers: any): Promise<any>{
     const authorizationHeader = headers.authorization; //It tries to extract the authorization header from the incoming request headers. This header typically contains the token used for authentication.
     if (authorizationHeader) {
       const token = authorizationHeader.replace('Bearer ', '');
-      const secret = process.env.JWTSECRET;
+      // const secret = process.env.JWTSECRET;
       //checks if the authorization header exists. If not, it will skip to the else block and throw an error
       try {
         const decoded = this.jwtService.verify(token);

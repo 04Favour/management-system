@@ -31,7 +31,7 @@ export class TodolistService {
   }
 
   update(id: number, updateTodolistDto: UpdateTodolistDto) {
-    return `This action updates a #${id} todolist`;
+    return this.todoRepo.update(id, updateTodolistDto);
   }
 
   remove(id: number) {

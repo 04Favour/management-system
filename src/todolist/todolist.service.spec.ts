@@ -20,7 +20,7 @@ export class UserServiceTesting{
     const userDetails = await this.userRepo.save({
       email,
       password: hashedPassword,
-      rest
+      ...rest
     })
     delete userDetails.password
     const userPayload = {id: userDetails.id, email: userDetails.email}

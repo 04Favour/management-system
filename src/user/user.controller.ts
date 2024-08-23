@@ -37,7 +37,7 @@ export class UserController {
   }
   @Get('/get')
   @UseGuards(AuthGuard(), RoleGuard)
-  @Roles(`user`)
+  @Roles(`user`, `admin`)
   findAll(){
     return this.userService.findAll()
   }

@@ -1,21 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule} from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceOptions } from 'config/typeorm';
 
 @Module({
-    imports: [ConfigModule, TypeOrmModule.forRootAsync({
-        useFactory: (configService: ConfigService)=> ({
-            type: `mysql`,
-            port: configService.get<number>(`PORT`),
-            host: configService.get(`HOST`),
-            username: configService.get(`DB_USERNAME`),
-            password: configService.get(`DB_PASSWORD`),
-            database: configService.get(`DB_NAME`),
-            synchronize: true,
-            autoLoadEntities: true,
-        }),
-        inject: [ConfigService],
-    })]
+    imports: [
+        ConfigModule.forRoot({isGlobal: true}),
+        TypeOrmModule.forRoot(dataSourceOptions)
+    ]
 })
 export class DatabaseModule {}
