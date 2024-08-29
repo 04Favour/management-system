@@ -7,6 +7,9 @@ import {
   Req,
   Res,
   UseGuards,
+  Patch,
+  Param,
+  Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,6 +19,7 @@ import { Request, Response } from 'express'; // Add this line
 import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from 'src/guard/role.guard';
 import { Roles } from 'src/guard/role';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -24,6 +28,16 @@ export class UserController {
   @Post('signup')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id:string, @Body() payload:UpdateUserDto) {
+    return this.userService.update(id, payload)
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id:string){
+    return this.userService.deleteUser(id)
   }
 
   @Post('/login')

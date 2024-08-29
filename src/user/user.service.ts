@@ -33,6 +33,28 @@ export class UserService {
     }
   }
 
+  async update(id, payload: UpdateUserDto) {
+    const user = await this.userRepo.findOneBy({id})
+    if (!user) {
+      throw new HttpException(`User invalid`, 401)
+    }
+    await this.userRepo.update(id, payload)
+    return {
+      message: `User successfully updated`
+    }
+  }
+
+  async deleteUser(id) {
+    const user = await this.userRepo.findOneBy({id})
+    if (!user) {
+      throw new HttpException(`User Invalid`, 401)
+    }
+    await this.userRepo.delete(id)
+    return {
+      message: `User successfully deleted`
+    }
+  }
+
   async findEmail(email:string){
     const mail = await this.userRepo.findOneByOrFail({email})
     if (!mail){
