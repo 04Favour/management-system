@@ -99,8 +99,11 @@ export class UserService {
     }
   }
 
-  findAll() {
-    return this.userRepo.find();
+  async findAll(email: string) {
+    // return this.userRepo.find();
+    const user = await this.findEmail(email)
+    delete user.password;
+    return user;
   }
 
   async user (headers: any): Promise<any>{
