@@ -50,8 +50,8 @@ export class UserController {
     return this.userService.logout(req, res)
   }
   @Get('/get')
-  @UseGuards(AuthGuard(), RoleGuard)
-  @Roles( `user`)
+  // @UseGuards(AuthGuard(), RoleGuard)
+  // @Roles( `user`)
   findAll(){
     return this.userService.findAll()
   }
