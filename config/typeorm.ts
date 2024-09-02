@@ -16,9 +16,9 @@ export const dataSourceOptions: DataSourceOptions=({
     database: configService.get(`DB_NAME`),
     entities: ['dist/**/*.entity.js'],
     migrations: ['dist/config/migrations/*.js'],
-    synchronize: false,
-    connectTimeout: 30000,
-    // synchronize: true,
+    // synchronize: false,
+    // connectTimeout: 30000,
+    synchronize: true,
 })
 const dataSource = new DataSource(dataSourceOptions)
 export default dataSource;
