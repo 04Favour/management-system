@@ -20,6 +20,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { RoleGuard } from 'src/guard/role.guard';
 import { Roles } from 'src/guard/role';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './Entity/user.entity';
 
 @Controller('user')
 export class UserController {
@@ -52,7 +53,7 @@ export class UserController {
   @Get('/get')
   // @UseGuards(AuthGuard(), RoleGuard)
   // @Roles( `user`)
-  async findAll(){
+  async findAll():Promise<User[]>{
     return await this.userService.findAll()
   }
 
