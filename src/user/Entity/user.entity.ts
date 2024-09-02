@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, OneToMany } from 'typeorm';
-import { Base } from './base.entity';
+import { Base } from './baseEntity';
 import { Role } from '../../enum/role.enum';
 import { Todolist } from 'src/todolist/entities/todolist.entity';
 
