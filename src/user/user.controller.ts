@@ -52,8 +52,8 @@ export class UserController {
   @Get('/get')
   // @UseGuards(AuthGuard(), RoleGuard)
   // @Roles( `user`)
-  findAll(email: string){
-    return this.userService.findAll(email)
+  findAll(){
+    return this.userService.findAll()
   }
 
   

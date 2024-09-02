@@ -91,7 +91,7 @@ export class UserService {
   async logout(@Req()req:Request, @Res()res: Response){
     const clearCookie = res.clearCookie(`isAuthenticated`)
 
-    const response = res.send(`User succesfully logout`)
+    const response = res.send(`User succesfully logout`);
 
     return {
       clearCookie,
@@ -99,11 +99,12 @@ export class UserService {
     }
   }
 
-  async findAll(email: string) {
+  async findAll(): Promise<User[]> {
     // return this.userRepo.find();
-    const user = await this.findEmail(email)
-    delete user.password;
-    return user;
+    // const user = await this.findEmail(email);
+
+    // delete user.password;
+    return await this.userRepo.find();
   }
 
   async user (headers: any): Promise<any>{
