@@ -14,7 +14,7 @@ export class TodolistService {
 
   async create(payload: CreateTodolistDto, user: User) {
     const todo = new Todolist();
-    todo.userId = user.id;
+    todo.UserId = user.id;
     todo.title = payload.title;
     todo.description = payload.description;
     Object.assign(todo, payload);

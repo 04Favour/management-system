@@ -10,7 +10,7 @@ export class Todolist extends Base {
     description: string;
     
     @Column()
-    userId: string;
+    UserId: string;
 
     @ManyToOne(()=> User, (user)=> user.todo)
     user: User[]
