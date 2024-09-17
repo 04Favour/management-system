@@ -24,7 +24,7 @@ export class TodolistController {
   constructor(private readonly todolistService: TodolistService) {}
 
   @Post()
-  @UseGuards(AuthGuard(), RoleGuard)
+  // @UseGuards(AuthGuard(), RoleGuard)
   @Roles('user', 'admin')
   create(@Body() createTodolistDto: CreateTodolistDto, @Req() req: Request) {
     return this.todolistService.create(createTodolistDto, req.user as User);

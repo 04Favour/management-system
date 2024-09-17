@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateTodolistDto } from './dto/create-todolist.dto';
 import { UpdateTodolistDto } from './dto/update-todolist.dto';
@@ -5,7 +6,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Todolist } from './entities/todolist.entity';
 import { Repository } from 'typeorm';
 import { User } from 'src/user/Entity/user.entity';
-
 
 @Injectable()
 export class TodolistService {
