@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateTodolistDto } from './dto/create-todolist.dto';
 import { UpdateTodolistDto } from './dto/update-todolist.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,6 +15,9 @@ export class TodolistService {
   async create(payload: CreateTodolistDto, user: User) {
     const todo = new Todolist();
     todo.UserId = user.id;
+    if (!user.id){
+      throw new HttpException(`ID not found`, 400)
+    }
     todo.title = payload.title;
     todo.description = payload.description;
     Object.assign(todo, payload);
